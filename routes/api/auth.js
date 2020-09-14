@@ -104,7 +104,7 @@ const {
   checkRole,
 } = require("../../config/userauth");
 
-router.post("/createUser", userAuth, checkRole(["admin"]), (req, res) => {
+router.post("/createexec", userAuth, checkRole(["admin"]), (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
   if (!isValid) {
@@ -133,5 +133,9 @@ router.post("/createUser", userAuth, checkRole(["admin"]), (req, res) => {
       });
     }
   });
+});
+
+router.get("/profile", userAuth, (req, res) => {
+  return res.json(serializedUser(req.user));
 });
 module.exports = router;
